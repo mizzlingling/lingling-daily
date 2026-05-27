@@ -87,7 +87,6 @@ const oceanQuotes = [
 
 - **Email**: lingling.yang@linecorp.com
 - **GitHub**: @mizzlingling
-- **Instagram**: @abearhug
 
 ## 📄 License
 
