@@ -12,34 +12,63 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
             background: linear-gradient(to bottom, #a8d5d5 0%, #7ec4c4 100%);
             min-height: 100vh;
-            padding: 0;
+            padding: 30px 20px;
         }
 
         .container {
             background: white;
-            max-width: 100%;
+            max-width: 680px;
             margin: 0 auto;
-            min-height: 100vh;
-        }
-
-        .header {
-            background: #a8d5d5;
-            padding: 60px 40px 40px;
-            text-align: center;
+            overflow: hidden;
+            border: 2px solid #7ec4c4;
             position: relative;
         }
 
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C150,60 350,0 600,50 C850,100 1050,40 1200,60 L1200,0 L0,0 Z" fill="%23a8d5d5" opacity="0.3"/></svg>');
+            background-size: cover;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #a8d5d5 0%, #7ec4c4 100%);
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 3px solid #6bb0b0;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C150,50 350,20 600,40 C850,60 1050,30 1200,50 L1200,120 L0,120 Z" fill="white"/></svg>');
+            background-size: cover;
+        }
+
         .header-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            width: 60px;
+            height: 60px;
             background: white;
-            border-radius: 50%;
-            padding: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 5px;
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.8);
         }
 
         .header-icon img {
@@ -49,168 +78,188 @@
         }
 
         .header-text h1 {
-            font-size: 2.5em;
-            font-weight: 300;
+            font-size: 1.8em;
+            font-weight: 600;
             color: white;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
+            margin-bottom: 5px;
         }
 
         .date {
             font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 300;
-            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.95);
         }
 
         .content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 50px 40px;
+            padding: 40px 30px 30px;
+            position: relative;
         }
 
         .counter-section {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 60px;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
         .counter-card {
+            background: linear-gradient(135deg, #e6f7f7 0%, #d0f0f0 100%);
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
-            flex: 1;
-            max-width: 200px;
+            border: 2px solid #a8d5d5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .counter-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,50 C200,80 400,20 600,50 C800,80 1000,20 1200,50 L1200,120 L0,120 Z" fill="%23a8d5d5" opacity="0.2"/></svg>');
+            background-size: cover;
         }
 
         .counter-label {
-            font-size: 0.75em;
-            color: #999;
-            margin-bottom: 10px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: 0.85em;
+            color: #5a9999;
+            margin-bottom: 8px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
         }
 
         .counter-value {
-            font-size: 2.5em;
-            font-weight: 300;
-            color: #7ec4c4;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #3d8585;
             font-variant-numeric: tabular-nums;
-        }
-
-        .divider {
-            width: 60px;
-            height: 1px;
-            background: #ddd;
-            margin: 50px auto;
+            position: relative;
+            z-index: 1;
         }
 
         .section {
-            margin-bottom: 50px;
+            background: #fafcfc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #d0f0f0;
+            border-left: 4px solid #7ec4c4;
         }
 
         .section-title {
-            font-size: 1em;
-            font-weight: 400;
-            margin-bottom: 20px;
-            color: #7ec4c4;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-align: center;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #3d8585;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .weather-info, .horoscope-info {
-            line-height: 2;
-            color: #666;
+            line-height: 1.8;
+            color: #4a6b6b;
             font-size: 0.95em;
-            font-weight: 300;
         }
 
         .info-item {
-            margin-bottom: 10px;
-            text-align: center;
+            margin-bottom: 8px;
         }
 
         .info-item strong {
-            color: #333;
-            font-weight: 400;
+            color: #2d6666;
+            font-weight: 600;
         }
 
         .horoscope-text {
-            margin-bottom: 30px;
-            line-height: 2;
-            text-align: center;
-            color: #666;
-            font-weight: 300;
+            margin-bottom: 15px;
+            line-height: 1.8;
         }
 
         .horoscope-matches {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 15px;
         }
 
         .match-card {
+            background: white;
+            padding: 15px 10px;
+            border-radius: 8px;
             text-align: center;
+            border: 2px solid #d0f0f0;
         }
 
         .match-label {
-            font-size: 0.75em;
-            color: #999;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: 0.8em;
+            color: #7a9a9a;
+            margin-bottom: 5px;
+            font-weight: 500;
         }
 
         .match-value {
-            font-size: 1em;
-            font-weight: 300;
-            color: #333;
+            font-size: 0.95em;
+            font-weight: 600;
+            color: #3d8585;
         }
 
         .footer {
             text-align: center;
-            color: #999;
-            font-size: 0.85em;
-            padding: 40px;
-            font-weight: 300;
-            letter-spacing: 1px;
+            color: #7a9a9a;
+            font-size: 0.9em;
+            padding: 20px 30px 30px;
+            border-top: 2px solid #e6f7f7;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,50 C200,20 400,80 600,50 C800,20 1000,80 1200,50 L1200,0 L0,0 Z" fill="%23e6f7f7"/></svg>');
+            background-size: cover;
         }
 
         .loading {
-            color: #999;
+            color: #7a9a9a;
             font-size: 0.9em;
-            text-align: center;
         }
 
         @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
             .header {
-                padding: 40px 20px 30px;
+                padding: 25px 20px;
+            }
+
+            .header-icon {
+                width: 50px;
+                height: 50px;
             }
 
             .header-text h1 {
-                font-size: 1.8em;
-                letter-spacing: 4px;
+                font-size: 1.5em;
             }
 
             .content {
-                padding: 40px 20px;
+                padding: 30px 20px 20px;
             }
 
             .counter-section {
-                flex-direction: column;
-                gap: 30px;
-            }
-
-            .counter-card {
-                max-width: 100%;
+                grid-template-columns: 1fr;
             }
 
             .horoscope-matches {
-                flex-direction: column;
-                gap: 20px;
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -230,28 +279,24 @@
         <div class="content">
             <div class="counter-section">
                 <div class="counter-card">
-                    <div class="counter-label">Since Feb 19, 2018</div>
+                    <div class="counter-label">💕 從2018年2月19日開始</div>
                     <div class="counter-value" id="daysSince"></div>
                 </div>
                 <div class="counter-card">
-                    <div class="counter-label">10th Anniversary</div>
+                    <div class="counter-label">🎉 十週年倒數</div>
                     <div class="counter-value" id="daysUntil"></div>
                 </div>
             </div>
 
-            <div class="divider"></div>
-
             <div class="section">
-                <div class="section-title">Jukdo Beach Weather</div>
+                <div class="section-title">🌊 襄陽죽도해수욕장天氣預報</div>
                 <div class="weather-info" id="weatherInfo">
                     <div class="loading">載入天氣資料中...</div>
                 </div>
             </div>
 
-            <div class="divider"></div>
-
             <div class="section">
-                <div class="section-title">Aquarius Daily</div>
+                <div class="section-title">♒ 水瓶座運勢</div>
                 <div class="horoscope-info" id="horoscopeInfo">
                     <div class="loading">載入運勢資料中...</div>
                 </div>
