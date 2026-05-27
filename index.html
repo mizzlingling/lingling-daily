@@ -195,47 +195,49 @@
             border-radius: 2px;
         }
 
-        .calendar-info, .horoscope-info {
+        .horoscope-info {
             line-height: 1.8;
             color: #4a6b6b;
             font-size: 0.95em;
         }
 
-        .calendar-event {
-            padding: 12px;
-            margin-bottom: 10px;
-            background: white;
-            border-radius: 6px;
-            border-left: 3px solid #7ec4c4;
+        .instagram-section {
+            border: none;
+            background: transparent;
+            padding: 20px 0;
         }
 
-        .calendar-event:last-child {
-            margin-bottom: 0;
+        .instagram-gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .event-time {
-            font-size: 0.85em;
-            color: #7a9a9a;
-            margin-bottom: 5px;
-            font-weight: 500;
+        .instagram-photo {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #d0f0f0;
+            transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
-        .event-title {
-            color: #2d6666;
-            font-weight: 600;
-            margin-bottom: 3px;
+        .instagram-photo:hover {
+            transform: scale(1.05);
+            border-color: #7ec4c4;
         }
 
-        .event-location {
-            font-size: 0.85em;
-            color: #5a9999;
+        .instagram-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .no-events {
-            text-align: center;
-            color: #7a9a9a;
-            padding: 20px;
-            font-style: italic;
+        @media (max-width: 600px) {
+            .instagram-gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .horoscope-text {
@@ -354,16 +356,16 @@
             </div>
 
             <div class="section">
-                <div class="section-title">今日會議行程</div>
-                <div class="calendar-info" id="calendarInfo">
-                    <div class="loading">載入行程資料中...</div>
-                </div>
-            </div>
-
-            <div class="section">
                 <div class="section-title">水瓶座運勢</div>
                 <div class="horoscope-info" id="horoscopeInfo">
                     <div class="loading">載入運勢資料中...</div>
+                </div>
+            </div>
+
+            <div class="section instagram-section">
+                <div class="section-title">Instagram @abearhug</div>
+                <div class="instagram-gallery" id="instaGallery">
+                    <div class="loading">載入照片中...</div>
                 </div>
             </div>
         </div>
@@ -394,36 +396,27 @@
             document.getElementById('daysUntil').textContent = `${daysUntil} 天`;
         }
 
-        // 載入 Google Calendar 行程
-        async function loadCalendar() {
-            // 注意：這需要在伺服器端實現 Google Calendar API 授權
-            // 由於靜態網頁無法直接存取 Google Calendar API（需要 OAuth）
-            // 這裡顯示今天的實際會議資料
+        // 載入 Instagram 照片
+        async function loadInstagram() {
+            // 注意：Instagram Graph API 需要 access token
+            // 這裡使用示範照片，實際需要後端支援或使用 Instagram Embed API
 
-            const today = new Date();
-            const events = [
-                {
-                    time: '17:00 - 18:00',
-                    title: 'PM 월간 미팅 (5월)',
-                    location: 'Zoom'
-                }
+            // 隨機選擇5張照片（示範用）
+            const demoPhotos = [
+                'https://picsum.photos/400/400?random=1',
+                'https://picsum.photos/400/400?random=2',
+                'https://picsum.photos/400/400?random=3',
+                'https://picsum.photos/400/400?random=4',
+                'https://picsum.photos/400/400?random=5'
             ];
 
-            if (events.length === 0) {
-                document.getElementById('calendarInfo').innerHTML = `
-                    <div class="no-events">今天沒有安排會議</div>
-                `;
-            } else {
-                const eventsHtml = events.map(event => `
-                    <div class="calendar-event">
-                        <div class="event-time">${event.time}</div>
-                        <div class="event-title">${event.title}</div>
-                        ${event.location ? `<div class="event-location">📍 ${event.location}</div>` : ''}
-                    </div>
-                `).join('');
+            const photosHtml = demoPhotos.map((photo, index) => `
+                <div class="instagram-photo">
+                    <img src="${photo}" alt="Instagram photo ${index + 1}" loading="lazy">
+                </div>
+            `).join('');
 
-                document.getElementById('calendarInfo').innerHTML = eventsHtml;
-            }
+            document.getElementById('instaGallery').innerHTML = photosHtml;
         }
 
         // 載入運勢
@@ -451,8 +444,8 @@
 
         // 頁面載入時執行
         calculateDates();
-        loadCalendar();
         loadHoroscope();
+        loadInstagram();
     </script>
 </body>
 </html>
