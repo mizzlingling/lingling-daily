@@ -398,25 +398,43 @@
 
         // 載入 Instagram 照片
         async function loadInstagram() {
-            // 注意：Instagram Graph API 需要 access token
-            // 這裡使用示範照片，實際需要後端支援或使用 Instagram Embed API
+            try {
+                // 從本地 JSON 文件載入照片
+                const response = await fetch('instagram-photos.json');
 
-            // 隨機選擇5張照片（示範用）
-            const demoPhotos = [
-                'https://picsum.photos/400/400?random=1',
-                'https://picsum.photos/400/400?random=2',
-                'https://picsum.photos/400/400?random=3',
-                'https://picsum.photos/400/400?random=4',
-                'https://picsum.photos/400/400?random=5'
-            ];
+                if (response.ok) {
+                    const photos = await response.json();
 
-            const photosHtml = demoPhotos.map((photo, index) => `
-                <div class="instagram-photo">
-                    <img src="${photo}" alt="Instagram photo ${index + 1}" loading="lazy">
-                </div>
-            `).join('');
+                    const photosHtml = photos.map((photo, index) => `
+                        <a href="${photo.link}" target="_blank" class="instagram-photo">
+                            <img src="${photo.url}" alt="Instagram @abearhug photo ${index + 1}" loading="lazy" onerror="this.src='https://picsum.photos/seed/abearhug${index}/400/400'">
+                        </a>
+                    `).join('');
 
-            document.getElementById('instaGallery').innerHTML = photosHtml;
+                    document.getElementById('instaGallery').innerHTML = photosHtml;
+                } else {
+                    throw new Error('Failed to load photos');
+                }
+            } catch (error) {
+                console.error('Instagram load error:', error);
+
+                // 備用方案：使用 fallback 照片
+                const fallbackPhotos = [
+                    'https://picsum.photos/seed/abearhug1/400/400',
+                    'https://picsum.photos/seed/abearhug2/400/400',
+                    'https://picsum.photos/seed/abearhug3/400/400',
+                    'https://picsum.photos/seed/abearhug4/400/400',
+                    'https://picsum.photos/seed/abearhug5/400/400'
+                ];
+
+                const photosHtml = fallbackPhotos.map((photo, index) => `
+                    <a href="https://www.instagram.com/abearhug/" target="_blank" class="instagram-photo">
+                        <img src="${photo}" alt="Instagram @abearhug photo ${index + 1}" loading="lazy">
+                    </a>
+                `).join('');
+
+                document.getElementById('instaGallery').innerHTML = photosHtml;
+            }
         }
 
         // 載入運勢
