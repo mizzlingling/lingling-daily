@@ -201,43 +201,65 @@
             font-size: 0.95em;
         }
 
-        .instagram-section {
-            border: none;
-            background: transparent;
-            padding: 20px 0;
-        }
-
-        .instagram-gallery {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .instagram-photo {
-            aspect-ratio: 1;
-            border-radius: 8px;
+        .quote-section {
+            background: linear-gradient(135deg, #e6f7f7 0%, #d0f0f0 100%);
+            border: 2px solid #a8d5d5;
+            position: relative;
             overflow: hidden;
-            border: 2px solid #d0f0f0;
-            transition: transform 0.3s ease;
-            cursor: pointer;
         }
 
-        .instagram-photo:hover {
-            transform: scale(1.05);
-            border-color: #7ec4c4;
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,50 C200,80 400,20 600,50 C800,80 1000,20 1200,50 L1200,120 L0,120 Z" fill="rgba(168,213,213,0.3)"/></svg>');
+            background-size: cover;
+            pointer-events: none;
         }
 
-        .instagram-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .ocean-quote {
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        @media (max-width: 600px) {
-            .instagram-gallery {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        .quote-text {
+            font-size: 1.1em;
+            font-style: italic;
+            color: #2d6666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .quote-text::before {
+            content: '"';
+            font-size: 2em;
+            color: #7ec4c4;
+            opacity: 0.5;
+            position: relative;
+            top: 10px;
+            margin-right: 5px;
+        }
+
+        .quote-text::after {
+            content: '"';
+            font-size: 2em;
+            color: #7ec4c4;
+            opacity: 0.5;
+            position: relative;
+            top: 10px;
+            margin-left: 5px;
+        }
+
+        .quote-author {
+            font-size: 0.9em;
+            color: #5a9999;
+            font-weight: 500;
         }
 
         .horoscope-text {
@@ -355,17 +377,17 @@
                 </div>
             </div>
 
+            <div class="section quote-section">
+                <div class="section-title">今日海語</div>
+                <div class="ocean-quote" id="oceanQuote">
+                    <div class="loading">載入中...</div>
+                </div>
+            </div>
+
             <div class="section">
                 <div class="section-title">水瓶座運勢</div>
                 <div class="horoscope-info" id="horoscopeInfo">
                     <div class="loading">載入運勢資料中...</div>
-                </div>
-            </div>
-
-            <div class="section instagram-section">
-                <div class="section-title">Instagram @abearhug</div>
-                <div class="instagram-gallery" id="instaGallery">
-                    <div class="loading">載入照片中...</div>
                 </div>
             </div>
         </div>
@@ -396,45 +418,52 @@
             document.getElementById('daysUntil').textContent = `${daysUntil} 天`;
         }
 
-        // 載入 Instagram 照片
-        async function loadInstagram() {
-            try {
-                // 從本地 JSON 文件載入照片
-                const response = await fetch('instagram-photos.json');
+        // 大海 Quotes 集合
+        const oceanQuotes = [
+            { text: "大海是生命的起源，也是心靈的歸宿", author: "無名" },
+            { text: "海浪教會我們，無論多少次被擊倒，都要再次站起", author: "海明威" },
+            { text: "大海不會拒絕任何一條河流", author: "中國諺語" },
+            { text: "在海邊，時間總是靜止的", author: "無名" },
+            { text: "海洋是地球的心跳", author: "雅克·庫斯托" },
+            { text: "海能沖刷一切，除了記憶", author: "無名" },
+            { text: "人生如同大海，有時平靜，有時洶湧", author: "無名" },
+            { text: "海的彼岸，是另一個自己", author: "無名" },
+            { text: "聽海的聲音，找回內心的平靜", author: "無名" },
+            { text: "大海永遠在那裡，等待著每一個勇敢的靈魂", author: "無名" },
+            { text: "海水是鹹的，因為它收藏了太多眼淚", author: "無名" },
+            { text: "與海對話，就是與自己的靈魂對話", author: "無名" },
+            { text: "海浪來了又去，但大海永遠在那裡", author: "無名" },
+            { text: "面對大海，我們都是渺小的", author: "無名" },
+            { text: "海的深度，如同心的深度", author: "無名" },
+            { text: "每一個浪花，都是大海的吟唱", author: "無名" },
+            { text: "海岸線是世界上最美的曲線", author: "無名" },
+            { text: "海洋的呼吸，就是地球的呼吸", author: "雅克·庫斯托" },
+            { text: "在海邊，所有的煩惱都會被沖走", author: "無名" },
+            { text: "大海有答案，如果你願意傾聽", author: "無名" },
+            { text: "海是藍色的夢境，永不醒來", author: "無名" },
+            { text: "每次看海，都是一次重新出發", author: "無名" },
+            { text: "海風帶走憂愁，留下希望", author: "無名" },
+            { text: "潮來潮去，唯有大海不變", author: "無名" },
+            { text: "海洋教會我們包容與接納", author: "無名" },
+            { text: "在海的面前，我們學會謙卑", author: "無名" },
+            { text: "海的盡頭，是新的開始", author: "無名" },
+            { text: "聽海哭的聲音，也聽海笑的聲音", author: "無名" },
+            { text: "每一滴海水，都有自己的故事", author: "無名" },
+            { text: "大海是最好的療癒師", author: "無名" },
+            { text: "站在海邊，就是站在世界的邊緣", author: "無名" }
+        ];
 
-                if (response.ok) {
-                    const photos = await response.json();
+        // 根據日期選擇 Quote（每天不同）
+        function loadOceanQuote() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const quoteIndex = dayOfYear % oceanQuotes.length;
+            const quote = oceanQuotes[quoteIndex];
 
-                    const photosHtml = photos.map((photo, index) => `
-                        <a href="${photo.link}" target="_blank" class="instagram-photo">
-                            <img src="${photo.url}" alt="Instagram @abearhug photo ${index + 1}" loading="lazy" onerror="this.src='https://picsum.photos/seed/abearhug${index}/400/400'">
-                        </a>
-                    `).join('');
-
-                    document.getElementById('instaGallery').innerHTML = photosHtml;
-                } else {
-                    throw new Error('Failed to load photos');
-                }
-            } catch (error) {
-                console.error('Instagram load error:', error);
-
-                // 備用方案：使用 fallback 照片
-                const fallbackPhotos = [
-                    'https://picsum.photos/seed/abearhug1/400/400',
-                    'https://picsum.photos/seed/abearhug2/400/400',
-                    'https://picsum.photos/seed/abearhug3/400/400',
-                    'https://picsum.photos/seed/abearhug4/400/400',
-                    'https://picsum.photos/seed/abearhug5/400/400'
-                ];
-
-                const photosHtml = fallbackPhotos.map((photo, index) => `
-                    <a href="https://www.instagram.com/abearhug/" target="_blank" class="instagram-photo">
-                        <img src="${photo}" alt="Instagram @abearhug photo ${index + 1}" loading="lazy">
-                    </a>
-                `).join('');
-
-                document.getElementById('instaGallery').innerHTML = photosHtml;
-            }
+            document.getElementById('oceanQuote').innerHTML = `
+                <div class="quote-text">${quote.text}</div>
+                <div class="quote-author">— ${quote.author}</div>
+            `;
         }
 
         // 載入運勢
@@ -462,8 +491,8 @@
 
         // 頁面載入時執行
         calculateDates();
+        loadOceanQuote();
         loadHoroscope();
-        loadInstagram();
     </script>
 </body>
 </html>
