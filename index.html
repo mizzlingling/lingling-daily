@@ -195,19 +195,47 @@
             border-radius: 2px;
         }
 
-        .weather-info, .horoscope-info {
+        .calendar-info, .horoscope-info {
             line-height: 1.8;
             color: #4a6b6b;
             font-size: 0.95em;
         }
 
-        .info-item {
-            margin-bottom: 8px;
+        .calendar-event {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid #7ec4c4;
         }
 
-        .info-item strong {
+        .calendar-event:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-time {
+            font-size: 0.85em;
+            color: #7a9a9a;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .event-title {
             color: #2d6666;
             font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .event-location {
+            font-size: 0.85em;
+            color: #5a9999;
+        }
+
+        .no-events {
+            text-align: center;
+            color: #7a9a9a;
+            padding: 20px;
+            font-style: italic;
         }
 
         .horoscope-text {
@@ -326,16 +354,16 @@
             </div>
 
             <div class="section">
-                <div class="section-title">水瓶座運勢</div>
-                <div class="horoscope-info" id="horoscopeInfo">
-                    <div class="loading">載入運勢資料中...</div>
+                <div class="section-title">今日會議行程</div>
+                <div class="calendar-info" id="calendarInfo">
+                    <div class="loading">載入行程資料中...</div>
                 </div>
             </div>
 
             <div class="section">
-                <div class="section-title">襄陽죽도해수욕장天氣預報</div>
-                <div class="weather-info" id="weatherInfo">
-                    <div class="loading">載入天氣資料中...</div>
+                <div class="section-title">水瓶座運勢</div>
+                <div class="horoscope-info" id="horoscopeInfo">
+                    <div class="loading">載入運勢資料中...</div>
                 </div>
             </div>
         </div>
@@ -366,33 +394,41 @@
             document.getElementById('daysUntil').textContent = `${daysUntil} 天`;
         }
 
-        // 載入天氣資料
-        async function loadWeather() {
-            try {
-                // 這裡使用 wttr.in API 獲取天氣
-                const response = await fetch('https://wttr.in/Jukdo+Beach+Yangyang+Korea?format=j1');
-                const data = await response.json();
+        // 載入 Google Calendar 行程
+        async function loadCalendar() {
+            // 注意：這需要在伺服器端實現 Google Calendar API 授權
+            // 由於靜態網頁無法直接存取 Google Calendar API（需要 OAuth）
+            // 這裡提供示範結構，實際需要後端支援或使用 Google Calendar 公開嵌入
 
-                const current = data.current_condition[0];
-                const weather = data.weather[0];
+            // 暫時顯示示範資料
+            const today = new Date();
+            const events = [
+                {
+                    time: '09:00 - 10:00',
+                    title: '團隊會議',
+                    location: 'Meeting Room A'
+                },
+                {
+                    time: '14:00 - 15:30',
+                    title: '專案討論',
+                    location: 'Zoom'
+                }
+            ];
 
-                document.getElementById('weatherInfo').innerHTML = `
-                    <div class="info-item"><strong>溫度：</strong>${current.temp_C}°C（體感 ${current.FeelsLikeC}°C）</div>
-                    <div class="info-item"><strong>天氣：</strong>${getWeatherDesc(current.weatherDesc[0].value)}</div>
-                    <div class="info-item"><strong>風速：</strong>${current.windspeedKmph} km/h（${(current.windspeedKmph / 3.6).toFixed(1)} m/s），${getWindDir(current.winddir16Point)}</div>
-                    <div class="info-item"><strong>🌊 浪高：</strong>約 0.2-0.3 米</div>
-                    <div class="info-item"><strong>預報：</strong>最高 ${weather.maxtempC}°C / 最低 ${weather.mintempC}°C</div>
-                    <div class="info-item"><strong>濕度：</strong>${current.humidity}%</div>
+            if (events.length === 0) {
+                document.getElementById('calendarInfo').innerHTML = `
+                    <div class="no-events">今天沒有安排會議</div>
                 `;
-            } catch (error) {
-                document.getElementById('weatherInfo').innerHTML = `
-                    <div class="info-item"><strong>溫度：</strong>16°C</div>
-                    <div class="info-item"><strong>天氣：</strong>小雨、薄霧</div>
-                    <div class="info-item"><strong>風速：</strong>16 km/h（4.4 m/s），北北西</div>
-                    <div class="info-item"><strong>🌊 浪高：</strong>0.22-0.26 米</div>
-                    <div class="info-item"><strong>預報：</strong>最高 17°C / 最低 15°C</div>
-                    <div class="info-item" style="color: #f5576c;">⚠️ 能見度較低，建議攜帶雨具</div>
-                `;
+            } else {
+                const eventsHtml = events.map(event => `
+                    <div class="calendar-event">
+                        <div class="event-time">${event.time}</div>
+                        <div class="event-title">${event.title}</div>
+                        ${event.location ? `<div class="event-location">📍 ${event.location}</div>` : ''}
+                    </div>
+                `).join('');
+
+                document.getElementById('calendarInfo').innerHTML = eventsHtml;
             }
         }
 
@@ -419,34 +455,9 @@
             `;
         }
 
-        // 翻譯天氣描述
-        function getWeatherDesc(desc) {
-            const translations = {
-                'Partly cloudy': '局部多雲',
-                'Cloudy': '多雲',
-                'Overcast': '陰天',
-                'Light rain': '小雨',
-                'Mist': '薄霧',
-                'Clear': '晴朗',
-                'Sunny': '晴天'
-            };
-            return translations[desc] || desc;
-        }
-
-        // 翻譯風向
-        function getWindDir(dir) {
-            const translations = {
-                'N': '北', 'NNE': '北北東', 'NE': '東北', 'ENE': '東北東',
-                'E': '東', 'ESE': '東南東', 'SE': '東南', 'SSE': '南南東',
-                'S': '南', 'SSW': '南南西', 'SW': '西南', 'WSW': '西南西',
-                'W': '西', 'WNW': '西北西', 'NW': '西北', 'NNW': '北北西'
-            };
-            return translations[dir] || dir;
-        }
-
         // 頁面載入時執行
         calculateDates();
-        loadWeather();
+        loadCalendar();
         loadHoroscope();
     </script>
 </body>
