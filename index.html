@@ -222,42 +222,43 @@
 
         .ocean-quote {
             text-align: center;
-            padding: 30px 20px;
+            padding: 20px 20px 25px;
             position: relative;
             z-index: 1;
         }
 
         .quote-text {
-            font-size: 1.1em;
+            font-size: 0.95em;
             font-style: italic;
             color: #2d6666;
-            line-height: 1.8;
-            margin-bottom: 15px;
+            line-height: 1.6;
+            margin-bottom: 10px;
             font-weight: 300;
+            font-family: Georgia, 'Times New Roman', serif;
         }
 
         .quote-text::before {
             content: '"';
-            font-size: 2em;
+            font-size: 1.5em;
             color: #7ec4c4;
             opacity: 0.5;
             position: relative;
-            top: 10px;
-            margin-right: 5px;
+            top: 8px;
+            margin-right: 3px;
         }
 
         .quote-text::after {
             content: '"';
-            font-size: 2em;
+            font-size: 1.5em;
             color: #7ec4c4;
             opacity: 0.5;
             position: relative;
-            top: 10px;
-            margin-left: 5px;
+            top: 8px;
+            margin-left: 3px;
         }
 
         .quote-author {
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: #5a9999;
             font-weight: 500;
         }
@@ -418,39 +419,39 @@
             document.getElementById('daysUntil').textContent = `${daysUntil} 天`;
         }
 
-        // 大海 Quotes 集合
+        // Ocean Quotes Collection
         const oceanQuotes = [
-            { text: "大海是生命的起源，也是心靈的歸宿", author: "無名" },
-            { text: "海浪教會我們，無論多少次被擊倒，都要再次站起", author: "海明威" },
-            { text: "大海不會拒絕任何一條河流", author: "中國諺語" },
-            { text: "在海邊，時間總是靜止的", author: "無名" },
-            { text: "海洋是地球的心跳", author: "雅克·庫斯托" },
-            { text: "海能沖刷一切，除了記憶", author: "無名" },
-            { text: "人生如同大海，有時平靜，有時洶湧", author: "無名" },
-            { text: "海的彼岸，是另一個自己", author: "無名" },
-            { text: "聽海的聲音，找回內心的平靜", author: "無名" },
-            { text: "大海永遠在那裡，等待著每一個勇敢的靈魂", author: "無名" },
-            { text: "海水是鹹的，因為它收藏了太多眼淚", author: "無名" },
-            { text: "與海對話，就是與自己的靈魂對話", author: "無名" },
-            { text: "海浪來了又去，但大海永遠在那裡", author: "無名" },
-            { text: "面對大海，我們都是渺小的", author: "無名" },
-            { text: "海的深度，如同心的深度", author: "無名" },
-            { text: "每一個浪花，都是大海的吟唱", author: "無名" },
-            { text: "海岸線是世界上最美的曲線", author: "無名" },
-            { text: "海洋的呼吸，就是地球的呼吸", author: "雅克·庫斯托" },
-            { text: "在海邊，所有的煩惱都會被沖走", author: "無名" },
-            { text: "大海有答案，如果你願意傾聽", author: "無名" },
-            { text: "海是藍色的夢境，永不醒來", author: "無名" },
-            { text: "每次看海，都是一次重新出發", author: "無名" },
-            { text: "海風帶走憂愁，留下希望", author: "無名" },
-            { text: "潮來潮去，唯有大海不變", author: "無名" },
-            { text: "海洋教會我們包容與接納", author: "無名" },
-            { text: "在海的面前，我們學會謙卑", author: "無名" },
-            { text: "海的盡頭，是新的開始", author: "無名" },
-            { text: "聽海哭的聲音，也聽海笑的聲音", author: "無名" },
-            { text: "每一滴海水，都有自己的故事", author: "無名" },
-            { text: "大海是最好的療癒師", author: "無名" },
-            { text: "站在海邊，就是站在世界的邊緣", author: "無名" }
+            { text: "The sea, once it casts its spell, holds one in its net of wonder forever", author: "Jacques Cousteau" },
+            { text: "To me the sea is a continual miracle; the fishes that swim, the rocks, the motion of the waves", author: "Walt Whitman" },
+            { text: "The voice of the sea speaks to the soul", author: "Kate Chopin" },
+            { text: "The ocean stirs the heart, inspires the imagination and brings eternal joy to the soul", author: "Robert Wyland" },
+            { text: "The sea does not reward those who are too anxious, too greedy, or too impatient", author: "Anne Morrow Lindbergh" },
+            { text: "In one drop of water are found all the secrets of all the oceans", author: "Kahlil Gibran" },
+            { text: "The cure for anything is salt water: sweat, tears, or the sea", author: "Isak Dinesen" },
+            { text: "We ourselves feel that what we are doing is just a drop in the ocean", author: "Mother Teresa" },
+            { text: "The sea is emotion incarnate. It loves, hates, and weeps", author: "Christopher Paolini" },
+            { text: "Why do we love the sea? It is because it has some potent power to make us think", author: "Robert Henri" },
+            { text: "The ocean is everything I want to be: beautiful, mysterious, wild, and free", author: "Unknown" },
+            { text: "Dance with the waves, move with the sea, let the rhythm of the water set your soul free", author: "Christy Ann Martine" },
+            { text: "At the beach, life is different. Time doesn't move hour to hour but mood to moment", author: "Unknown" },
+            { text: "The ocean is a mighty harmonist", author: "William Wordsworth" },
+            { text: "How inappropriate to call this planet Earth when it is quite clearly Ocean", author: "Arthur C. Clarke" },
+            { text: "The sea lives in every one of us", author: "Robert Wyland" },
+            { text: "The pessimist complains about the wind; the optimist expects it to change; the realist adjusts the sails", author: "William Arthur Ward" },
+            { text: "The sea is as near as we come to another world", author: "Anne Stevenson" },
+            { text: "Individually, we are one drop. Together, we are an ocean", author: "Ryunosuke Satoro" },
+            { text: "The ocean makes me feel really small and it makes me put my whole life into perspective", author: "Beyoncé" },
+            { text: "There must be something strangely sacred in salt. It is in our tears and in the sea", author: "Kahlil Gibran" },
+            { text: "I could never stay long enough on the shore; the tang of the untainted, fresh, and free sea air was like a cool, quieting thought", author: "Helen Keller" },
+            { text: "The sea will grant each man new hope, and sleep will bring dreams of home", author: "Christopher Columbus" },
+            { text: "The breaking of a wave cannot explain the whole sea", author: "Vladimir Nabokov" },
+            { text: "Live in the sunshine, swim the sea, drink the wild air", author: "Ralph Waldo Emerson" },
+            { text: "The sea, the great unifier, is man's only hope. Now, as never before, the old phrase has a literal meaning", author: "Jacques Cousteau" },
+            { text: "No water, no life. No blue, no green", author: "Sylvia Earle" },
+            { text: "The ocean is a central image. It is the symbolism of a great journey", author: "Enya" },
+            { text: "Being out there in the ocean, God's creation, it's like a gift He has given us", author: "Bethany Hamilton" },
+            { text: "The sea is only the embodiment of a supernatural and wonderful existence", author: "Jules Verne" },
+            { text: "Each wave of the sea has a different light, just as the beauty of who you are", author: "Unknown" }
         ];
 
         // 根據日期選擇 Quote（每天不同）
