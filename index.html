@@ -48,6 +48,26 @@
             gap: 20px;
             border-bottom: 3px solid #6bb0b0;
             position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 40px;
+            transform: translateY(-50%);
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 60"><path d="M0,30 Q100,10 200,30 T400,30 T600,30 T800,30 T1000,30 T1200,30" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none"/><path d="M0,40 Q120,25 240,40 T480,40 T720,40 T960,40 T1200,40" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none"/></svg>');
+            background-size: 200% 100%;
+            animation: wave 15s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes wave {
+            0% { background-position: 0% 0; }
+            100% { background-position: 200% 0; }
         }
 
         .header::after {
@@ -62,19 +82,26 @@
         }
 
         .header-icon {
-            width: 60px;
-            height: 60px;
-            background: white;
-            border-radius: 12px;
-            padding: 5px;
+            width: 90px;
+            height: 90px;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
             flex-shrink: 0;
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 1;
         }
 
         .header-icon img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+        }
+
+        .header-text {
+            position: relative;
+            z-index: 1;
         }
 
         .header-text h1 {
@@ -402,15 +429,15 @@
                 <div class="horoscope-matches">
                     <div class="match-card">
                         <div class="match-label">愛情</div>
-                        <div class="match-value">❤️ 射手座</div>
+                        <div class="match-value">射手座</div>
                     </div>
                     <div class="match-card">
                         <div class="match-label">友情</div>
-                        <div class="match-value">👯 雙子座</div>
+                        <div class="match-value">雙子座</div>
                     </div>
                     <div class="match-card">
                         <div class="match-label">事業</div>
-                        <div class="match-value">💼 獅子座</div>
+                        <div class="match-value">獅子座</div>
                     </div>
                 </div>
             `;
