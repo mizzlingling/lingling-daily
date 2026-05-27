@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>菱菱每日更新 🌸</title>
+    <title>菱菱每日更新 🦍</title>
     <style>
         * {
             margin: 0;
@@ -13,165 +13,141 @@
 
         body {
             font-family: 'SF Pro Text', 'Segoe UI', 'Microsoft JhengHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f5f5f5;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            width: 100%;
-            padding: 40px;
-            animation: fadeIn 0.6s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            background: white;
+            border: 1px solid #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
         }
 
         .header h1 {
-            font-size: 2em;
-            color: #667eea;
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            color: #000;
+            font-weight: 600;
         }
 
         .date {
-            font-size: 1.1em;
+            font-size: 0.95em;
             color: #666;
-            margin-bottom: 20px;
+            margin-top: 8px;
         }
 
         .counter-section {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 25px;
+            background: #000;
             color: white;
+            padding: 15px 20px;
+            margin-bottom: 25px;
         }
 
         .counter-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            font-size: 1.1em;
+            padding: 8px 0;
+            font-size: 0.95em;
         }
 
-        .counter-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .counter-label {
-            font-weight: 500;
+        .counter-item:first-child {
+            border-bottom: 1px solid #444;
+            padding-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .counter-value {
-            font-weight: 700;
-            font-size: 1.2em;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
         }
 
         .section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 20px;
+            border-left: 3px solid #000;
+            padding-left: 15px;
+            margin-bottom: 25px;
         }
 
         .section-title {
-            font-size: 1.3em;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
         }
 
         .weather-info, .horoscope-info {
-            line-height: 1.8;
-            color: #444;
+            line-height: 1.7;
+            color: #333;
+            font-size: 0.95em;
         }
 
         .info-item {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start;
+            margin-bottom: 6px;
         }
 
         .info-item strong {
-            min-width: 100px;
-            color: #667eea;
+            color: #000;
         }
 
         .horoscope-matches {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            display: flex;
+            gap: 15px;
             margin-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 15px;
         }
 
         .match-card {
-            background: white;
-            padding: 12px;
-            border-radius: 12px;
+            flex: 1;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .match-label {
-            font-size: 0.9em;
-            color: #666;
+            font-size: 0.85em;
+            color: #999;
             margin-bottom: 5px;
         }
 
         .match-value {
-            font-size: 1.1em;
-            font-weight: 700;
-            color: #667eea;
+            font-size: 0.95em;
+            font-weight: 600;
+            color: #000;
         }
 
         .footer {
             text-align: center;
-            color: #888;
-            font-size: 0.9em;
-            margin-top: 25px;
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
         }
 
         .loading {
-            text-align: center;
-            color: #667eea;
-            font-size: 1.2em;
+            color: #666;
+            font-size: 0.9em;
         }
 
         @media (max-width: 600px) {
             .container {
-                padding: 25px;
+                padding: 20px;
             }
 
             .header h1 {
-                font-size: 1.6em;
+                font-size: 1.5em;
             }
 
             .horoscope-matches {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -179,7 +155,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🌸 你好菱菱！</h1>
+            <h1>🦍 你好菱菱！</h1>
             <div class="date" id="currentDate"></div>
         </div>
 
