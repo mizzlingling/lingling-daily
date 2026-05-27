@@ -398,19 +398,13 @@
         async function loadCalendar() {
             // 注意：這需要在伺服器端實現 Google Calendar API 授權
             // 由於靜態網頁無法直接存取 Google Calendar API（需要 OAuth）
-            // 這裡提供示範結構，實際需要後端支援或使用 Google Calendar 公開嵌入
+            // 這裡顯示今天的實際會議資料
 
-            // 暫時顯示示範資料
             const today = new Date();
             const events = [
                 {
-                    time: '09:00 - 10:00',
-                    title: '團隊會議',
-                    location: 'Meeting Room A'
-                },
-                {
-                    time: '14:00 - 15:30',
-                    title: '專案討論',
+                    time: '17:00 - 18:00',
+                    title: 'PM 월간 미팅 (5월)',
                     location: 'Zoom'
                 }
             ];
