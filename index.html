@@ -129,6 +129,24 @@
             font-weight: 500;
             position: relative;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .counter-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: #a8d5d5;
+        }
+
+        .counter-label::after {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: #a8d5d5;
         }
 
         .counter-value {
@@ -138,6 +156,13 @@
             font-variant-numeric: tabular-nums;
             position: relative;
             z-index: 1;
+        }
+
+        .counter-years {
+            font-size: 0.75em;
+            color: #7a9a9a;
+            margin-top: 5px;
+            font-weight: 400;
         }
 
         .section {
@@ -156,7 +181,15 @@
             color: #3d8585;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(to bottom, #7ec4c4, #a8d5d5);
+            border-radius: 2px;
         }
 
         .weather-info, .horoscope-info {
@@ -279,24 +312,25 @@
         <div class="content">
             <div class="counter-section">
                 <div class="counter-card">
-                    <div class="counter-label">💕 從2018年2月19日開始</div>
+                    <div class="counter-label">從2018年2月19日開始</div>
                     <div class="counter-value" id="daysSince"></div>
+                    <div class="counter-years" id="yearsSince"></div>
                 </div>
                 <div class="counter-card">
-                    <div class="counter-label">🎉 十週年倒數</div>
+                    <div class="counter-label">十週年倒數</div>
                     <div class="counter-value" id="daysUntil"></div>
                 </div>
             </div>
 
             <div class="section">
-                <div class="section-title">🌊 襄陽죽도해수욕장天氣預報</div>
+                <div class="section-title">襄陽죽도해수욕장天氣預報</div>
                 <div class="weather-info" id="weatherInfo">
                     <div class="loading">載入天氣資料中...</div>
                 </div>
             </div>
 
             <div class="section">
-                <div class="section-title">♒ 水瓶座運勢</div>
+                <div class="section-title">水瓶座運勢</div>
                 <div class="horoscope-info" id="horoscopeInfo">
                     <div class="loading">載入運勢資料中...</div>
                 </div>
@@ -304,7 +338,6 @@
         </div>
 
         <div class="footer">
-            祝你有美好的一天！✨
         </div>
     </div>
 
@@ -319,10 +352,14 @@
             const daysSince = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
             const daysUntil = Math.floor((tenYearDate - today) / (1000 * 60 * 60 * 24));
 
+            // 計算年數（保留一位小數）
+            const yearsSince = (daysSince / 365.25).toFixed(1);
+
             // 更新頁面
             const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
             document.getElementById('currentDate').textContent = today.toLocaleDateString('zh-TW', options);
             document.getElementById('daysSince').textContent = `+${daysSince} 天`;
+            document.getElementById('yearsSince').textContent = `${yearsSince} 年`;
             document.getElementById('daysUntil').textContent = `${daysUntil} 天`;
         }
 
