@@ -27,18 +27,6 @@
             position: relative;
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C150,60 350,0 600,50 C850,100 1050,40 1200,60 L1200,0 L0,0 Z" fill="%23a8d5d5" opacity="0.3"/></svg>');
-            background-size: cover;
-            pointer-events: none;
-            z-index: 0;
-        }
 
         .header {
             background: linear-gradient(135deg, #a8d5d5 0%, #7ec4c4 100%);
@@ -46,7 +34,6 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            border-bottom: 3px solid #6bb0b0;
             position: relative;
             overflow: hidden;
         }
@@ -70,20 +57,9 @@
             100% { background-position: 200% 0; }
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C150,50 350,20 600,40 C850,60 1050,30 1200,50 L1200,120 L0,120 Z" fill="white"/></svg>');
-            background-size: cover;
-        }
-
         .header-icon {
-            width: 90px;
-            height: 90px;
+            width: 120px;
+            height: 120px;
             background: transparent;
             border-radius: 0;
             padding: 0;
@@ -350,16 +326,16 @@
             </div>
 
             <div class="section">
-                <div class="section-title">襄陽죽도해수욕장天氣預報</div>
-                <div class="weather-info" id="weatherInfo">
-                    <div class="loading">載入天氣資料中...</div>
+                <div class="section-title">水瓶座運勢</div>
+                <div class="horoscope-info" id="horoscopeInfo">
+                    <div class="loading">載入運勢資料中...</div>
                 </div>
             </div>
 
             <div class="section">
-                <div class="section-title">水瓶座運勢</div>
-                <div class="horoscope-info" id="horoscopeInfo">
-                    <div class="loading">載入運勢資料中...</div>
+                <div class="section-title">襄陽죽도해수욕장天氣預報</div>
+                <div class="weather-info" id="weatherInfo">
+                    <div class="loading">載入天氣資料中...</div>
                 </div>
             </div>
         </div>
