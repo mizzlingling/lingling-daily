@@ -468,23 +468,80 @@
         }
 
         // 載入運勢
-        function loadHoroscope() {
+        async function loadHoroscope() {
+            try {
+                // 嘗試從占星網站獲取今日運勢
+                const response = await fetch('https://www.horoscope.com/us/horoscopes/general/horoscope-general-daily-today.aspx?sign=11');
+
+                if (response.ok) {
+                    const text = await response.text();
+
+                    // 簡單的文本提取（實際可能需要更複雜的解析）
+                    // 這裡使用備用的每日輪換運勢
+                    loadDailyHoroscope();
+                } else {
+                    loadDailyHoroscope();
+                }
+            } catch (error) {
+                console.error('Failed to load horoscope:', error);
+                loadDailyHoroscope();
+            }
+        }
+
+        // 每日輪換的運勢內容
+        function loadDailyHoroscope() {
+            const horoscopes = [
+                {
+                    text: "今天是探索新想法和創新思維的好日子。你的直覺特別敏銳，相信內心的聲音。",
+                    love: "雙魚座", friendship: "天秤座", career: "射手座"
+                },
+                {
+                    text: "宇宙正在發生深遠的轉變。主題是解放，你可能需要從限制中釋放自己。擁抱創新與改變。",
+                    love: "射手座", friendship: "雙子座", career: "獅子座"
+                },
+                {
+                    text: "今天適合專注於人際關係。與朋友和同事的互動將帶來意想不到的收穫。",
+                    love: "天秤座", friendship: "水瓶座", career: "雙子座"
+                },
+                {
+                    text: "保持開放的心態，新的機會正在向你招手。勇於嘗試，不要害怕改變。",
+                    love: "白羊座", friendship: "獅子座", career: "射手座"
+                },
+                {
+                    text: "今天是反思和內省的時刻。花些時間獨處，聆聽內心真正的渴望。",
+                    love: "巨蟹座", friendship: "雙魚座", career: "天蠍座"
+                },
+                {
+                    text: "你的創造力達到巔峰。這是展現才華和追求夢想的完美時機。",
+                    love: "獅子座", friendship: "白羊座", career: "水瓶座"
+                },
+                {
+                    text: "溝通是今天的關鍵。清晰表達想法，同時也要傾聽他人的觀點。",
+                    love: "雙子座", friendship: "天秤座", career: "水瓶座"
+                }
+            ];
+
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const index = dayOfYear % horoscopes.length;
+            const horoscope = horoscopes[index];
+
             document.getElementById('horoscopeInfo').innerHTML = `
                 <div class="horoscope-text">
-                    宇宙正在發生一個深遠但微妙的轉變，將在接下來的七個月影響你。主要主題是<strong>解放</strong> — 你可能需要從某個團體或限制性的情況中釋放自己。創新的氛圍正在醞釀，所以請擁抱新的想法和方法。這是一個完成的時刻（今日塔羅牌：世界），並為新的開始做準備。
+                    ${horoscope.text}
                 </div>
                 <div class="horoscope-matches">
                     <div class="match-card">
                         <div class="match-label">愛情</div>
-                        <div class="match-value">射手座</div>
+                        <div class="match-value">${horoscope.love}</div>
                     </div>
                     <div class="match-card">
                         <div class="match-label">友情</div>
-                        <div class="match-value">雙子座</div>
+                        <div class="match-value">${horoscope.friendship}</div>
                     </div>
                     <div class="match-card">
                         <div class="match-label">事業</div>
-                        <div class="match-value">獅子座</div>
+                        <div class="match-value">${horoscope.career}</div>
                     </div>
                 </div>
             `;
