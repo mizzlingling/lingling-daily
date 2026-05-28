@@ -584,10 +584,55 @@
             `;
         }
 
+        // 更新所有內容
+        function updateAllContent() {
+            calculateDates();
+            loadOceanQuote();
+            loadHoroscope();
+        }
+
+        // 計算距離下一個午夜的毫秒數
+        function getMillisecondsUntilMidnight() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            return tomorrow - now;
+        }
+
+        // 設置午夜自動更新
+        function scheduleMidnightUpdate() {
+            const msUntilMidnight = getMillisecondsUntilMidnight();
+
+            setTimeout(() => {
+                // 更新內容
+                updateAllContent();
+
+                // 設置下一次更新（每24小時）
+                setInterval(updateAllContent, 24 * 60 * 60 * 1000);
+            }, msUntilMidnight);
+        }
+
         // 頁面載入時執行
-        calculateDates();
-        loadOceanQuote();
-        loadHoroscope();
+        updateAllContent();
+        scheduleMidnightUpdate();
+
+        // 監聽頁面可見性變化，當用戶回到頁面時檢查是否需要更新
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                // 檢查是否跨過了新的一天
+                const today = new Date().toDateString();
+                const lastUpdate = localStorage.getItem('lastUpdateDate');
+
+                if (lastUpdate !== today) {
+                    updateAllContent();
+                    localStorage.setItem('lastUpdateDate', today);
+                }
+            }
+        });
+
+        // 記錄首次載入日期
+        localStorage.setItem('lastUpdateDate', new Date().toDateString());
     </script>
 </body>
 </html>
